@@ -14,11 +14,50 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
+
+//sqli updates
+//maybe using cast bypass?
+$insert = "INSERT INTO Products (prod_name, price, description, prod_id) VALUES ('".$_POST['up_name']."', '".$_POST['up_price']."', '".$_POST['up_descr']."', '".$_POST['up_id']."')";
+
+$update = "UPDATE Products SET prod_name='".$_POST['up_name']."', price='".$_POST['up_price']."', description='".$_POST['up_descr']."' WHERE prod_id='".$_POST['up_id']."'";
+
+if (isset($_POST['submit'])) {
+// pull Products.prod_id array
+    $list = "SELECT prod_id FROM Products";
+    $haystack = mysqli_query($conn, $list);
+    $exists = false;
+    
+if ($haystack->num_rows > 0) {
+    // output data of each row
+    while($row = $haystack->fetch_assoc()) {
+        if ($_POST['up_id'] == $row["prod_id"]) { $exists = true; }
+    }
+}
+
+    if ($exists) {
+    // if up_id in array, updateRecord();
+        if (mysqli_query($conn, $update)) {
+      echo "Record updated successfully";
+   } else {
+      echo "Error updating record: " . mysqli_error($conn);
+   }
+    } else {     
+    // if up_id NOT in array, insertRecord(); 
+      if (mysqli_query($conn, $insert)) {
+        echo "Record inserted successfully";
+    } else {
+        echo "Error inserting record: " . mysqli_error($conn); 
+    }
+    } 
+}
+
+mysqli_close($conn);
 ?>
+
 <html>
 <head>
 <style>
-td {
+td { 
 padding: 5px;
 }
 td.id {
@@ -34,7 +73,7 @@ width: 7em;
 td.description {
 }
 tr.form-th-row {
-visibility: hidden;
+/*visibility: hidden;*/
 }
 </style>
 </head>
@@ -45,49 +84,12 @@ visibility: hidden;
 Please help us keep records up-to-date!
 </p>
 </div>
-<div>
-<table>
-<tr><th>ID</th><th>Name</th><th>Price (USD)</th><th>Description</th></tr>
-<?php 
-//insert data table
-$sql = "SELECT prod_id, prod_name, price, description FROM Products";
-$result = mysqli_query($conn, $sql);
 
-if (mysqli_num_rows($result) > 0) {
-    // output data of each row
-    while($row = mysqli_fetch_assoc($result)) {
-        echo "<tr><td class='id'>" . $row["prod_id"]. "</td><td class='name'>" . $row["prod_name"]. "</td><td class='price'>$" . $row["price"]. "</td><td class='description'>" . $row['description']. "</td></tr>";
-    }
-} else {
-    echo "0 results";
-}
-?>
-</table>
-</div>
-<div>debug:<?php echo $_POST['up_id']; ?></div>
 <div>
-<table>
+<table><tr class="form-th-row"><th style="width:8em">ID</th><th style="width:17em">Name</th><th style="width:10em">Price (USD)</th><th style="width:10em">Description</th><th></th></tr></table>
 <form method="post" action="updateTable.php">
-<tr class="form-th-row"><th>ID</th><th>Name</th><th>Price (USD)</th><th>Description</th><th></th></tr>
-<tr><td><input type="text" value="" id="up_id" size="8"/></td><td><input type="text" value="" id="up_name" size="30"/></td><td><input type="text" value="" id="up_price" size="10"/></td><td><input type="text" value="" id="up_descr" size="50" maxlength="300"/></td><td><input type="submit" value="Update Record"/></td></tr>
+<input type="text" value="" name="up_id" id="up_id" size="8"/><input type="text" value="" name="up_name" id="up_name" size="30"/><input type="text" value="" name="up_price" id="up_price" size="10"/><input type="text" value="" name="up_descr" id="up_descr" size="50" maxlength="300"/><input type="submit" name="submit" value="Update Records"/>
 </form>
-<?php
-//sqli updates
-//maybe using cast bypass?
-$update = "UPDATE Products SET prod_name='".$_POST['up_name']."', price='".$_POST['up_price']."', description='".$_POST['up_descr']."' WHERE prod_id='".$_POST['up_id']."'";
-
-function updateRecord() {
-   if (mysqli_query($conn, $update)) {
-      echo "Record updated successfully";
-   } else {
-      echo "Error updating record: " . mysqli_error($conn);
-   }
-}
-if (isset($_POST['submit'])) {
-    updateRecord();
-}
-?>
-</table>
 </div>
 
 </body>
