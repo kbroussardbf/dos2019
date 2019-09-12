@@ -1,5 +1,5 @@
 <?php
-//$USER = $_GET['user'];
+$USER = $_GET['user'];
 ?>
 
 <html>
@@ -10,6 +10,7 @@
 <img src="media/Beagle-Care.jpg" alt="Intranet logo" height="200px" width="" />
 </div>
 <div id="right" align="right" style="display:inline-block">
+<a href="login.php">Log in</a>
 <h1>Welcome<?php if ($USER) { echo " ".$USER; } else { echo " Intranet User"; } ?>!</h1>
 <ul>
 <li><a href="reset.php">Reset your password</a>
@@ -18,7 +19,7 @@
 <a href="directory.php">Shared directory listing</a>
 </li>
 <li>
-<a href="updateTable.php">Data Management Interface (DMI)</a>
+<a href="showTable.php">Data Management Interface (DMI)</a>
 </li>
 </ul>
 </div>
