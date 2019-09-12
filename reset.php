@@ -1,9 +1,12 @@
 <?php
 //$USER = $_GET['user'];
 $email = $_POST['email'];
-setcookie('email', $email, time() + (86400 * 30), "/");
-//get sec question for email
-//return sec question to reset2.php
+setrawcookie('email', $email, time() + (86400 * 30), "/");
+
+//redirect to reset2.php
+if ($email) { 
+    header('Location: reset2.php');
+}
 ?>
 
 <html>
@@ -12,11 +15,14 @@ setcookie('email', $email, time() + (86400 * 30), "/");
 <body>
 <h1>Reset Password</h1>
 <div>
-<p>
-form action="reset.php" <br/>
-Reset password for email:<br/>
-submit button
+
+<form method="POST" action="reset.php">
+<p>Reset password for email:<br/>
+<input type="email" value="" id="email" name="email"/>
 </p>
+<input type="submit" value="submit" id="submit" name="submit"/>
+</form>
+
 </div>
 </body>
 </html>
