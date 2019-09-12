@@ -25,4 +25,4 @@ MYSQL_SCRIPT
 
 echo "Database configured"
 echo "Application data ready"
-echo "Open http://localhost/dos2010yyz/ in your browser"
+echo "Open http://localhost/dos2019yyz/ in your browser"
