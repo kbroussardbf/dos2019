@@ -14,7 +14,7 @@
 if (isset($_POST['dir'])) {
   $dir = $_POST['dir']; } else { $dir = "shared/"; }
   //set path
-  $path = "/var/www/html/dos2019yyz/";
+  $path = "/var/www/html/dos2019/";
   //execute command from input
   $output = shell_exec("ls ".$path.$dir);
   $formatted = "<pre>$output</pre>"
