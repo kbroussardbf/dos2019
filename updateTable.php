@@ -3,7 +3,7 @@
 //$email = $_COOKIE['email'];
 
 $servername = "localhost";
-$dbname = "dos2019yyz";
+$dbname = "dos2019";
 $username = "test";
 $password = "pass";
 
