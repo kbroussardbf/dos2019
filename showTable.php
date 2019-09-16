@@ -38,7 +38,7 @@ Please help us keep records up-to-date!
 <tr><th>ID</th><th>Name</th><th>Price (USD)</th><th>Description</th></tr>
 <?php 
 $servername = "localhost";
-$dbname = "dos2019yyz";
+$dbname = "dos2019";
 $username = "test";
 $password = "pass";
 
