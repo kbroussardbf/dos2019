@@ -2,10 +2,10 @@
 
 service apache2 start
 service mysql start
-mysql -uroot <<MYSQL_SCRIPT
+mysql -u root <<MYSQL_SCRIPT
 CREATE DATABASE dos2019;
-CREATE USER 'test'@'localhost' IDENTIFIED BY 'pass';
-GRANT ALL PRIVILEGES ON *.* TO 'test'@'localhost';
+CREATE USER 'shecurity'@'localhost' IDENTIFIED BY 'pass';
+GRANT ALL PRIVILEGES ON *.* TO 'shecurity'@'localhost';
 FLUSH PRIVILEGES;
 USE dos2019;
 CREATE TABLE Users (id INT(3) UNSIGNED AUTO_INCREMENT PRIMARY KEY, uname VARCHAR(30) NOT NULL, pwd VARCHAR(60) NOT NULL, fname VARCHAR(30), lname VARCHAR(30), email VARCHAR(50), question VARCHAR(300) NOT NULL, answer VARCHAR(300) NOT NULL);
@@ -21,7 +21,6 @@ INSERT INTO Products (prod_id, prod_name, price, description) VALUES ('1052005',
 INSERT INTO Products (prod_id, prod_name, price, description) VALUES ('1052006', 'Laptop stand', '67.88', 'Glass laptop stand with 4 USB ports (out) and audio jack (out). USB ports powered by laptop when connected. Adjustable height.');
 INSERT INTO Products (prod_id, prod_name, price, description) VALUES ('1052007', '4ft USB', '17.50', '4ft USB cable, black');
 INSERT INTO Products (prod_id, prod_name, price, description) VALUES ('1052008', 'Rollerball ink pens (20)', '7.50', '20-pack of rollerball ink pens');
-exit;
 MYSQL_SCRIPT
 
 echo "Database configured"

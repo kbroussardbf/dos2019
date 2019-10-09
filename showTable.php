@@ -39,7 +39,7 @@ Please help us keep records up-to-date!
 <?php 
 $servername = "localhost";
 $dbname = "dos2019";
-$username = "test";
+$username = "shecurity";
 $password = "pass";
 
 // Create connection
