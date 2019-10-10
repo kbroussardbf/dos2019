@@ -17,7 +17,7 @@ if (!$conn) {
 
 //sqli updates
 //maybe using cast bypass?
-$insert = "INSERT INTO Products (prod_name, price, description, prod_id) VALUES (".$_POST['up_name'].", ".$_POST['up_price'].", ".$_POST['up_descr'].", ".$_POST['up_id'].")";
+$insert = "INSERT INTO Products (prod_name, price, description, prod_id) VALUES ('".$_POST['up_name']."', ".$_POST['up_price'].", ".$_POST['up_descr'].", ".$_POST['up_id'].")";
 
 $update = "UPDATE Products SET prod_name='".$_POST['up_name']."', price='".$_POST['up_price']."', description='".$_POST['up_descr']."' WHERE prod_id='".$_POST['up_id']."'";
 
